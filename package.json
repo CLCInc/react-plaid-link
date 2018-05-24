@@ -1,6 +1,6 @@
 {
   "name": "react-plaid-link",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A React component for Plaid Link",
   "files": [
     "dist/",
@@ -56,7 +56,8 @@
     "xyz": "0.5.x"
   },
   "scripts": {
-    "build": "babel -d lib/ src/"
+    "build": "babel -d lib/ src/",
+    "prepare": "npm run-script build"
   },
   "tags": [
     "react",
