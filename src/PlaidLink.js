@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Script from 'react-load-script';
 import PropTypes from 'prop-types';
 
-
-
 class PlaidLink extends Component {
   constructor(props) {
     super(props);
@@ -37,13 +35,14 @@ class PlaidLink extends Component {
   static propTypes = {
     // ApiVersion flag to use new version of Plaid API
     apiVersion: PropTypes.string,
-    
+
     // Displayed once a user has successfully linked their account
     clientName: PropTypes.string.isRequired,
 
     // The Plaid API environment on which to create user accounts.
     // For development and testing, use tartan. For production, use production
-    env: PropTypes.oneOf(['tartan', 'sandbox', 'development', 'production']).isRequired,
+    env: PropTypes.oneOf(['tartan', 'sandbox', 'development', 'production'])
+      .isRequired,
 
     // Open link to a specific institution, for a more custom solution
     institution: PropTypes.string,
@@ -56,8 +55,8 @@ class PlaidLink extends Component {
     // auth, identity, income, transactions
     product: PropTypes.arrayOf(
       PropTypes.oneOf([
-        'connect',  // legacy product name
-        'info',     // legacy product name
+        'connect', // legacy product name
+        'info', // legacy product name
         'auth',
         'identity',
         'income',
@@ -99,29 +98,30 @@ class PlaidLink extends Component {
 
     // Button Class names as a String
     className: PropTypes.string,
-  }
+  };
 
   onScriptError() {
     console.error('There was an issue loading the link-initialize.js script');
   }
 
   onScriptLoaded() {
-    window.linkHandler = window.Plaid.create({
-      apiVersion: this.props.apiVersion,
-      clientName: this.props.clientName,
-      env: this.props.env,
-      key: this.props.publicKey,
-      onExit: this.props.onExit,
-      onLoad: this.handleLinkOnLoad,
-      onEvent: this.props.onEvent,
-      onSuccess: this.props.onSuccess,
-      product: this.props.product,
-      selectAccount: this.props.selectAccount,
-      token: this.props.token,
-      webhook: this.props.webhook,
+    this.setState({
+      disabledButton: false,
+      linkHandler: window.Plaid.create({
+        apiVersion: this.props.apiVersion,
+        clientName: this.props.clientName,
+        env: this.props.env,
+        key: this.props.publicKey,
+        onExit: this.props.onExit,
+        onLoad: this.handleLinkOnLoad,
+        onEvent: this.props.onEvent,
+        onSuccess: this.props.onSuccess,
+        product: this.props.product,
+        selectAccount: this.props.selectAccount,
+        token: this.props.token,
+        webhook: this.props.webhook,
+      }),
     });
-
-    this.setState({ disabledButton: false });
   }
 
   handleLinkOnLoad() {
@@ -136,14 +136,14 @@ class PlaidLink extends Component {
       this.props.onClick();
     }
     const institution = this.props.institution || null;
-    if (window.linkHandler) {
-      window.linkHandler.open(institution);
+    if (this.state.linkHandler) {
+      this.state.linkHandler.open(institution);
     }
   }
 
   exit(configurationObject) {
-    if (window.linkHandler) {
-      window.linkHandler.exit(configurationObject);
+    if (this.state.linkHandler) {
+      this.state.linkHandler.exit(configurationObject);
     }
   }
 
