@@ -56,7 +56,7 @@
     "xyz": "0.5.x"
   },
   "scripts": {
-    "build": "babel -d dist/ src/"
+    "build": "babel -d lib/ src/"
   },
   "tags": [
     "react",
