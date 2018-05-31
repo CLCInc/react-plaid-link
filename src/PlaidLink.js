@@ -98,6 +98,9 @@ class PlaidLink extends Component {
 
     // Button Class names as a String
     className: PropTypes.string,
+
+    // Title to display for accessability
+    title: PropTypes.string
   };
 
   onScriptError() {
@@ -154,7 +157,8 @@ class PlaidLink extends Component {
           onClick={this.handleOnClick}
           disabled={this.state.disabledButton}
           style={this.props.style}
-          className={this.props.className}>
+          className={this.props.className}
+          title={this.props.title}>
           {this.props.children}
         </button>
         <Script
