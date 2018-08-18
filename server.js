@@ -13,13 +13,13 @@ new WebpackDevServer(webpack(config), {
     historyApiFallback: true,
     open: true,
     openPage: '/examples',
-}).listen(3000, 'localhost', function(err, result) {
+}).listen(9808, 'localhost', function(err, result) {
     if (err) {
         console.log(err);
     }
 
     console.log('Result: ', result);
 
-    console.log('Listening at localhost:3000');
-    opn('http://localhost:3000/examples/');
+    console.log('Listening at localhost:9808');
+    opn('http://localhost:9808/examples/');
 });

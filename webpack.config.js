@@ -24,7 +24,7 @@ module.exports = {
     entry: buildEntries(),
 
     output: {
-        filename: 'bundle.js',
+        filename: '[name]-bundle.js',
         path: path.join(__dirname, 'dist'),
         publicPath: '/static/',
     },

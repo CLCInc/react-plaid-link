@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PlaidLink from 'react-plaid-link';
 import util from '../util';
 
-class App extends Component {
+class MultiApp extends Component {
     constructor(props) {
         super(props);
     }
@@ -86,6 +86,6 @@ class App extends Component {
     }
 }
 
-const appElement = document.getElementById('root');
+const MultiAppElement = document.getElementById('root');
 
-ReactDOM.render(<App />, appElement);
+ReactDOM.render(<MultiApp />, MultiAppElement);
