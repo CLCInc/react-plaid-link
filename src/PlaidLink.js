@@ -17,15 +17,24 @@ class PlaidLink extends Component {
     }
 
     componentDidMount() {
-        if (window && !window.Plaid) {
+        if (typeof window.Plaid === 'undefined' && document.getElementById('link-init') === null) {
             this.linkInitialize = document.createElement('script');
             this.linkInitialize.type = 'text/javascript';
+            this.linkInitialize.id = 'link-init';
             this.linkInitialize.async = true;
             this.linkInitialize.src = 'https://cdn.plaid.com/link/v2/stable/link-initialize.js';
             this.linkInitialize.onerror = () => this.onScriptError();
             this.linkInitialize.onload = () => this.onScriptLoaded();
-            this.link.appendChild(this.linkInitialize);
+            document.head.appendChild(this.linkInitialize);
+        } else {
+            this.externalScriptTimeout = setTimeout(() => {
+                this.onScriptLoaded();
+            }, 1000);
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.externalScriptTimeout);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -97,7 +106,6 @@ class PlaidLink extends Component {
     render() {
         return (
             <button
-                ref={(link) => this.link = link}
                 onClick={this.handleOnClick}
                 disabled={this.state.disabledButton}
                 style={this.props.style}
