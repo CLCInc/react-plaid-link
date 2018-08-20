@@ -185,7 +185,7 @@ PlaidLink.propTypes = {
     // Button Class names as a String
     className: PropTypes.string,
 
-    // Title to display for accessability
+    // Title to display for accessibility
     title: PropTypes.string,
 };
 
