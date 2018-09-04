@@ -25,7 +25,7 @@ class PlaidLink extends Component {
             this.linkInitialize.src = 'https://cdn.plaid.com/link/v2/stable/link-initialize.js';
             this.linkInitialize.onerror = () => this.onScriptError();
             this.linkInitialize.onload = () => this.onScriptLoaded();
-            this.button.appendChild(this.linkInitialize);
+            document.body.appendChild(this.linkInitialize);
         } else {
             this.externalScriptTimeout = setTimeout(() => {
                 this.onScriptLoaded();
