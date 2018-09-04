@@ -6,8 +6,7 @@ class PlaidLink extends Component {
         super(props);
 
         this.state = {
-            disabledButton: true,
-            linkLoaded: false
+            disabledButton: true
         };
 
         this.onScriptError = this.onScriptError.bind(this);
@@ -84,7 +83,6 @@ class PlaidLink extends Component {
         if (this.props.onLoad != null) {
             this.props.onLoad();
         }
-        this.setState({ linkLoaded: true });
     }
 
     handleOnClick() {
@@ -106,7 +104,6 @@ class PlaidLink extends Component {
     render() {
         return (
             <button
-                ref={button => this.button = button}
                 onClick={this.handleOnClick}
                 disabled={this.state.disabledButton}
                 style={this.props.style}
