@@ -56,7 +56,7 @@
   },
   "scripts": {
     "build": "babel -d lib/ src/",
-    "prepare": "npm run-scripts build",
+    "prepare": "npm run build",
     "prepublish": "./node_modules/.bin/babel -d lib/ src/",
     "dev": "node server.js"
   },
